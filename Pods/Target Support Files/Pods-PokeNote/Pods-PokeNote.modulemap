@@ -1,0 +1,6 @@
+framework module Pods_PokeNote {
+  umbrella header "Pods-PokeNote-umbrella.h"
+
+  export *
+  module * { export * }
+}
