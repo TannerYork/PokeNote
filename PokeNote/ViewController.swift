@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var pokeNameTextFeild: UITextField!
     let pokeAPI = "https://pokeapi.co/docs/v2/"
     let imageURL = "http://pokeapi.co/media/sprites/pokemon/"
+    var getImage = ""
     var pokeName = ""
     var pokeDetails = ""
     var pokeImage = UIImage()
@@ -29,18 +30,21 @@ override func viewDidLoad() {
 
     
     //MARK: Actions
+    
     @IBAction func enterButton(_ sender: Any) {
         guard let pokemon = pokeNameTextFeild.text else {
              return
         }
         
+        pokemon.replacingOccurrences(of: " ", with: "")
         
-        pokemon.replacingOccurrences(of: " ", with: "+")
-        
-        var requestURL =  pokeAPI + pokemon + "/"
+        let pokeImageURL = self.imageURL + pokemon + ".png"
+        getImage = pokeImageURL
+        let requestURL =  pokeAPI + pokemon + "/"
         
         Alamofire.request(requestURL).responseJSON { (response) in
             switch response.result {
+                
             case .success(let value):
                 let json = JSON(value)
                 self.pokeName = json["name"].stringValue
@@ -48,27 +52,15 @@ override func viewDidLoad() {
                 
             default:
                 return
-    
-                
             }
         }
-        
     }
-    
-    
-    
-    
-    
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = UIViewController(nibName: "DetailsViewController", bundle: nil) as! DetailsViewController
-        guard let pokeName = pokeNameTextFeild.text else {
-            return
-        }
         vc.pokeName = pokeName
-        
+        vc.pokeDetails = pokeDetails
+        vc.pokeImage = imageURL
     }
     
 }
