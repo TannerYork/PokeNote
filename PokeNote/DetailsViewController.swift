@@ -17,21 +17,46 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var details: UITextView!
-    let pokeAPI = "https://pokeapi.co/docs/v2/"
+    @IBOutlet weak var pokeNameTextFeild: UITextField!
+    let pokeAPI = "https://pokeapi.co/api/v2/pokemon/"
+    let imageURL = "http://pokeapi.co/media/sprites/pokemon/"
+    var pokeImageURL = ""
     var pokeName = ""
     var pokeImage = ""
-    var pokeDetails = ""
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        name.text = pokeName
-        details.text = pokeDetails
-        image.sd_setImage(with: URL(string: pokeImage), placeholderImage: UIImage(named: "\(pokeName).png"))
-
-
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func enterButton(_ sender: Any) {
+        guard var pokemon = pokeNameTextFeild.text else {
+            return
+        }
+        
+        pokemon = pokemon.replacingOccurrences(of: " ", with: "")
+        let requestURL =  pokeAPI + pokemon + "/"
+        
+        Alamofire.request(requestURL).responseJSON { (response) in
+            switch response.result {
+                
+            case .success(let value):
+                let json = JSON(value)
+                self.pokeName = json["name"].stringValue
+                let pokeID = json["id"].stringValue
+                self.pokeImageURL = self.imageURL + pokeID + ".png"
+                self.name.text = self.pokeName
+                self.image.sd_setImage(with: URL(string: self.pokeImageURL), placeholderImage: UIImage(named: "placeholder.png"))
+                
+            case .failure(let error):
+                print(error)
+                
+            default:
+                return
+            }
+        }
     }
     
 
