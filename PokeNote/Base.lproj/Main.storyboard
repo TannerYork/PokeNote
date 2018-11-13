@@ -39,7 +39,7 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4qm-vZ-tCo">
-                                <rect key="frame" x="97" y="246" width="180" height="30"/>
+                                <rect key="frame" x="97" y="246" width="182" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.97254901959999995" green="0.79215686269999996" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="17"/>
@@ -66,7 +66,7 @@
                     </view>
                     <connections>
                         <outlet property="pokeNameTextFeild" destination="RH2-kf-3WF" id="ehx-eh-CrU"/>
-                        <outlet property="pokemonNameTextFeild" destination="RH2-kf-3WF" id="OFu-CE-Ctj"/>
+                        <segue destination="y2H-Ym-e9c" kind="show" identifier="segueToDetials" id="cuX-Y3-P63"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

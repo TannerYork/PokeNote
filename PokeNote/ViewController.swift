@@ -15,12 +15,10 @@ class ViewController: UIViewController {
 
     //MARK: Properties
     @IBOutlet weak var pokeNameTextFeild: UITextField!
-    let pokeAPI = "https://pokeapi.co/docs/v2/"
+    let pokeAPI = "https://pokeapi.co/api/v2/pokemon/"
     let imageURL = "http://pokeapi.co/media/sprites/pokemon/"
-    var getImage = ""
+    var pokeImageURL = ""
     var pokeName = ""
-    var pokeDetails = ""
-    var pokeImage = UIImage()
 
     
 override func viewDidLoad() {
@@ -38,8 +36,6 @@ override func viewDidLoad() {
         
         pokemon.replacingOccurrences(of: " ", with: "")
         
-        let pokeImageURL = self.imageURL + pokemon + ".png"
-        getImage = pokeImageURL
         let requestURL =  pokeAPI + pokemon + "/"
         
         Alamofire.request(requestURL).responseJSON { (response) in
@@ -48,8 +44,11 @@ override func viewDidLoad() {
             case .success(let value):
                 let json = JSON(value)
                 self.pokeName = json["name"].stringValue
-                self.pokeDetails = json["details"].stringValue
-                
+                let pokeID = json["id"].stringValue
+                self.pokeImageURL = self.imageURL + pokeID + ".png"
+                self.performSegue(withIdentifier: "segueToDetials", sender: self)
+            case .failure(let error):
+                print(error)
             default:
                 return
             }
@@ -57,10 +56,9 @@ override func viewDidLoad() {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = UIViewController(nibName: "DetailsViewController", bundle: nil) as! DetailsViewController
+        let vc = segue.destination as! DetailsViewController
         vc.pokeName = pokeName
-        vc.pokeDetails = pokeDetails
-        vc.pokeImage = imageURL
+        vc.pokeImage = pokeImageURL
     }
     
 }
