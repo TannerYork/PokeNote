@@ -47,19 +47,19 @@ override func viewDidLoad() {
                 let pokeID = json["id"].stringValue
                 self.pokeImageURL = self.imageURL + pokeID + ".png"
                 self.performSegue(withIdentifier: "segueToDetials", sender: self)
+                
             case .failure(let error):
                 print(error)
+                
             default:
                 return
             }
         }
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! DetailsViewController
         vc.pokeName = pokeName
         vc.pokeImage = pokeImageURL
     }
-    
 }
 
