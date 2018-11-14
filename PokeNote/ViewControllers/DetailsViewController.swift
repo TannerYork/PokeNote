@@ -25,7 +25,6 @@ class DetailsViewController: UIViewController {
     var pokeImage = ""
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -44,21 +43,38 @@ class DetailsViewController: UIViewController {
                 
             case .success(let value):
                 let json = JSON(value)
-                self.pokeName = json["name"].stringValue
-                let pokeID = json["id"].stringValue
-                self.pokeImageURL = self.imageURL + pokeID + ".png"
-                self.name.text = self.pokeName
-                self.image.sd_setImage(with: URL(string: self.pokeImageURL), placeholderImage: UIImage(named: "placeholder.png"))
+                self.getPokemon(json)
                 
             case .failure(let error):
                 print(error)
-                
-            default:
                 return
+           
             }
         }
     }
     
-
+    
+    
+    //Gets a pokemon from the JSON data and sets up the assosiated objects and values
+    func getPokemon(_ json: JSON) {
+        
+        let pokemon = Pokemon(json)
+        
+        pokeImageURL = self.imageURL + pokemon.id + ".png"
+        name.text = pokemon.name
+        image.sd_setImage(with: URL(string: self.pokeImageURL), placeholderImage: UIImage(named: "placeholder.png"))
+        
+        var pokeTypes: [String: UIColor] = [:]
+        pokeTypes.removeAll()
+        for type in pokemon.types {
+            pokeTypes[type] = Types.getColor(type)
+        }
+        
+        
+        
+        
+    }
+    
+    
     
 }
