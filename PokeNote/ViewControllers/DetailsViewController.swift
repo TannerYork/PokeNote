@@ -15,45 +15,39 @@ class DetailsViewController: UIViewController {
 
     //MARK: Properties
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var frontImage: UIImageView!
     @IBOutlet weak var details: UITextView!
-    @IBOutlet weak var pokeNameTextFeild: UITextField!
+    @IBOutlet weak var backImage: UIImageView!
+    
     let pokeAPI = "https://pokeapi.co/api/v2/pokemon/"
     let imageURL = "http://pokeapi.co/media/sprites/pokemon/"
     var pokeImageURL = ""
-    var pokeName = ""
-    var pokeImage = ""
-    
-    
+    var pokemon = ""
+    var pokeTypes: [String: UIColor] = [:]
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
-    
-    @IBAction func enterButton(_ sender: Any) {
-        guard var pokemon = pokeNameTextFeild.text else {
-            return
-        }
         
-        pokemon = pokemon.replacingOccurrences(of: " ", with: "")
+        //Creates the url for the specific pokemon data
         let requestURL =  pokeAPI + pokemon + "/"
         
-        Alamofire.request(requestURL).responseJSON { (response) in
+        //Uses the url to get the json data from the url
+            Alamofire.request(requestURL).responseJSON { (response) in
             switch response.result {
                 
+                //If Successful setup the pokemon and view
             case .success(let value):
                 let json = JSON(value)
                 self.getPokemon(json)
                 
+                //If it fails print the error
             case .failure(let error):
                 print(error)
                 return
-           
+                
             }
         }
     }
-    
-    
     
     //Gets a pokemon from the JSON data and sets up the assosiated objects and values
     func getPokemon(_ json: JSON) {
@@ -62,19 +56,63 @@ class DetailsViewController: UIViewController {
         
         pokeImageURL = self.imageURL + pokemon.id + ".png"
         name.text = pokemon.name
-        image.sd_setImage(with: URL(string: self.pokeImageURL), placeholderImage: UIImage(named: "placeholder.png"))
+        frontImage.sd_setImage(with: URL(string: pokemon.sprites["front_default"]!), placeholderImage: UIImage(named: "placeholder.png"))
+         backImage.sd_setImage(with: URL(string: pokemon.sprites["back_default"]!), placeholderImage: UIImage(named: "placeholder2.png"))
         
-        var pokeTypes: [String: UIColor] = [:]
         pokeTypes.removeAll()
         for type in pokemon.types {
             pokeTypes[type] = Types.getColor(type)
         }
         
-        
+        let details = ""
+        self.details.text = details
         
         
     }
     
-    
-    
 }
+
+
+//Swith class for getting the type and chaning name lable for details view to the azzosiated color
+//Currently due to the error for retrieving the types this does not work...
+    //    switch pokeTypes {
+    //    case ["bug": .bug]:
+    //        name.backgroundColor = .bug
+    //    case ["dark": .dark]:
+    //        name.backgroundColor = .dark
+    //    case ["dragon": .dragon]:
+    //        name.backgroundColor = .dragon
+    //    case ["electric": .electric]:
+    //        name.backgroundColor = .electric
+    //    case ["fairy": .fairy]:
+    //        name.backgroundColor = .fairy
+    //    case ["fighting": .fighting]:
+    //        name.backgroundColor = .fighting
+    //    case ["fire": .fire]:
+    //        name.backgroundColor = .fire
+    //    case ["flying": .flying]:
+    //        name.backgroundColor = .flying
+    //    case ["ghost": .ghost]:
+    //        name.backgroundColor = .ghost
+    //    case ["grass": .grass]:
+    //        name.backgroundColor = .grass
+    //    case ["ground": .ground]:
+    //        name.backgroundColor = .ground
+    //    case ["ice": .ice]:
+    //        name.backgroundColor = .ice
+    //    case ["normal": .normal]:
+    //        name.backgroundColor = .normal
+    //    case ["poison": .poison]:
+    //        name.backgroundColor = .poison
+    //    case ["rock": .rock]:
+    //        name.backgroundColor = .rock
+    //    case ["steel": .steel]:
+    //        name.backgroundColor = .steel
+    //    case ["water": .water]:
+    //        name.backgroundColor = .water
+    //    default:
+    //        return
+    //    }
+    //
+
+

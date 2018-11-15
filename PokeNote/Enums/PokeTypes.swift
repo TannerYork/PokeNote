@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+
+//Enumeration for the types with a method for returning a color based on the type
 enum Types {
     case bug
     case dark

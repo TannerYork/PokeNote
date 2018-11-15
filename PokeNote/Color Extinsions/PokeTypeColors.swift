@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+//Color extensions for pokemon types
 extension UIColor {
     
     static let bug = UIColor(red:0.34, green:0.59, blue:0.35, alpha:1.0)
