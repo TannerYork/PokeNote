@@ -38,11 +38,11 @@
                                     <constraint firstAttribute="height" constant="116" id="1Ac-eQ-dMj"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" red="0.4103371798992157" green="0.5" blue="0.21945914626121521" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="15"/>
+                                <color key="textColor" red="0.28136184811592102" green="0.34744751453399658" blue="0.15289700031280518" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" name="PokemonGB" family="Pokemon GB" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokemon Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJe-kg-Rd5">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pokemon Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJe-kg-Rd5">
                                 <rect key="frame" x="144" y="85" width="222.5" height="46"/>
                                 <color key="backgroundColor" red="0.80866080522537231" green="0.40109413862228394" blue="0.35683810710906982" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" name="PokemonSolidNormal" family="Pokemon Solid" pointSize="32"/>
@@ -50,7 +50,9 @@
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TXh-HN-3pd">
@@ -61,6 +63,23 @@
                                 <rect key="frame" x="194" y="242" width="122" height="129"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPK-1C-y2Q">
+                                <rect key="frame" x="247" y="605" width="112" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.97254901959999995" green="0.79215686269999996" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="PokemonGB" family="Pokemon GB" pointSize="19"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleColor" red="0.80866080520000005" green="0.40109413859999998" blue="0.35683810710000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="backToHomeVC:" destination="pYw-9w-gMu" eventType="touchUpInside" id="WMp-B1-ATB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.87058823529999996" green="0.36862745099999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -110,7 +129,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pokemon Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ge-uM-F5H">
                                                     <rect key="frame" x="15" y="20" width="327" height="50"/>
                                                     <fontDescription key="fontDescription" name="PokemonGB" family="Pokemon GB" pointSize="18"/>
-                                                    <color key="textColor" red="0.41033717990000002" green="0.5" blue="0.21945914629999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="textColor" red="0.28131163888355809" green="0.34505869289340096" blue="0.1526179354741993" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -139,11 +158,14 @@
                                 <color key="textColor" red="0.97254901959999995" green="0.79215686269999996" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" placeholder="Pokemon" translatesAutoresizingMaskIntoConstraints="NO" id="PH1-zn-a95">
+                            <searchBar contentMode="redraw" placeholder="Seach Pokemon" translatesAutoresizingMaskIntoConstraints="NO" id="PH1-zn-a95">
                                 <rect key="frame" x="0.0" y="221" width="375" height="56"/>
                                 <color key="backgroundColor" red="0.80866080520000005" green="0.40109413859999998" blue="0.35683810710000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="barTintColor" red="0.80866080520000005" green="0.40109413859999998" blue="0.35683810710000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bAK-X9-kwz" id="VDP-tO-kBd"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="0.80866080522537231" green="0.40109413862228394" blue="0.35683810710906982" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -164,7 +186,7 @@
                     </view>
                     <connections>
                         <outlet property="Pokemon" destination="F6Y-UZ-8Fg" id="Qj3-HT-T5S"/>
-                        <outlet property="seach" destination="PH1-zn-a95" id="hJt-Cm-xhA"/>
+                        <outlet property="searchBar" destination="PH1-zn-a95" id="hJt-Cm-xhA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZf-uc-huv" userLabel="First Responder" sceneMemberID="firstResponder"/>

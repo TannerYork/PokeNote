@@ -23,7 +23,7 @@ class DetailsViewController: UIViewController {
     let imageURL = "http://pokeapi.co/media/sprites/pokemon/"
     var pokeImageURL = ""
     var pokemon = ""
-    var pokeTypes: [String: UIColor] = [:]
+    var pokeTypes: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +49,11 @@ class DetailsViewController: UIViewController {
         }
     }
     
+    @IBAction func backToHomeVC(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    
     //Gets a pokemon from the JSON data and sets up the assosiated objects and values
     func getPokemon(_ json: JSON) {
         
@@ -61,58 +66,61 @@ class DetailsViewController: UIViewController {
         
         pokeTypes.removeAll()
         for type in pokemon.types {
-            pokeTypes[type] = Types.getColor(type)
+            pokeTypes.append(type)
         }
-        
+        getTypeColor(pokeTypes)
         let details = ""
         self.details.text = details
         
         
     }
     
+    
+    //Swith method for getting the type and chaning name lable for details view to the azzosiated color
+    func getTypeColor(_ pokeTypes: [String]) {
+        for type in pokeTypes {
+            switch type {
+            case "bug":
+                name.backgroundColor = .bug
+            case "dark":
+                name.backgroundColor = .dark
+            case "dragon":
+                name.backgroundColor = .dragon
+            case "electric":
+                name.backgroundColor = .electric
+            case "fairy":
+                name.backgroundColor = .fairy
+            case "fighting":
+                name.backgroundColor = .fighting
+            case "fire":
+                name.backgroundColor = .fire
+            case "flying":
+                name.backgroundColor = .flying
+            case "ghost":
+                 name.backgroundColor = .ghost
+            case "grass":
+                 name.backgroundColor = .grass
+            case "ground":
+                 name.backgroundColor = .ground
+            case "ice":
+                 name.backgroundColor = .ice
+            case "normal":
+                 name.backgroundColor = .normal
+            case "poison":
+                 name.backgroundColor = .poison
+            case "psychic":
+                 name.backgroundColor = .psychic
+            case "rock":
+                 name.backgroundColor = .rock
+            case "steel":
+                 name.backgroundColor = .steel
+            case "water":
+                 name.backgroundColor = .water
+            default:
+                return
+            }
+        }
+    }
 }
-
-
-//Swith class for getting the type and chaning name lable for details view to the azzosiated color
-//Currently due to the error for retrieving the types this does not work...
-    //    switch pokeTypes {
-    //    case ["bug": .bug]:
-    //        name.backgroundColor = .bug
-    //    case ["dark": .dark]:
-    //        name.backgroundColor = .dark
-    //    case ["dragon": .dragon]:
-    //        name.backgroundColor = .dragon
-    //    case ["electric": .electric]:
-    //        name.backgroundColor = .electric
-    //    case ["fairy": .fairy]:
-    //        name.backgroundColor = .fairy
-    //    case ["fighting": .fighting]:
-    //        name.backgroundColor = .fighting
-    //    case ["fire": .fire]:
-    //        name.backgroundColor = .fire
-    //    case ["flying": .flying]:
-    //        name.backgroundColor = .flying
-    //    case ["ghost": .ghost]:
-    //        name.backgroundColor = .ghost
-    //    case ["grass": .grass]:
-    //        name.backgroundColor = .grass
-    //    case ["ground": .ground]:
-    //        name.backgroundColor = .ground
-    //    case ["ice": .ice]:
-    //        name.backgroundColor = .ice
-    //    case ["normal": .normal]:
-    //        name.backgroundColor = .normal
-    //    case ["poison": .poison]:
-    //        name.backgroundColor = .poison
-    //    case ["rock": .rock]:
-    //        name.backgroundColor = .rock
-    //    case ["steel": .steel]:
-    //        name.backgroundColor = .steel
-    //    case ["water": .water]:
-    //        name.backgroundColor = .water
-    //    default:
-    //        return
-    //    }
-    //
 
 

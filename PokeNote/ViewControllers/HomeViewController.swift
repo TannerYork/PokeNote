@@ -13,14 +13,22 @@ import SwiftyJSON
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var Pokemon: UITableView!
-    @IBOutlet weak var seach: UISearchBar!
+    @IBOutlet weak var searchBar: UISearchBar!
     let allPokemon = "https://pokeapi.co/api/v2/pokemon/"
     var pokeNames: [String] = []
+    var searching: Bool?
     var json = JSON()
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    var searchResults: [String] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getALLPokemon()
+        searchBar.delegate = self
+        Pokemon.reloadData()
+
     }
     
     
@@ -51,13 +59,22 @@ class HomeViewController: UIViewController {
     //Sends the data from the selected cell to the details view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        let indexPath = self.Pokemon!.indexPathsForSelectedRows!.first!
-        let poke = pokeNames[indexPath.row]
+        var poke = pokeNames[indexPath.row]
+        if searching == true {
+             poke = searchResults[indexPath.row]
+        } else {
+             poke = pokeNames[indexPath.row]
+        }
         let vc = segue.destination as! DetailsViewController
         vc.pokemon = poke
         
     }
-
+    
+   
 }
+
+
+
 
 //Extension for tableview methods/setup
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
@@ -67,13 +84,33 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searching == true {
+            return searchResults.count
+        }
         return pokeNames.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonTableViewCell", for: indexPath) as! PokemonTableViewCell
-        cell.pokeNameLable.text = pokeNames[indexPath.row]
+        let pokemon: String
+        if searching == true {
+            pokemon = searchResults[indexPath.row]
+            cell.pokeNameLable.text = pokemon
+        } else {
+            pokemon = pokeNames[indexPath.row]
+            cell.pokeNameLable.text = pokemon
+        }
         return cell
+    }
+    
+}
+
+extension HomeViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchResults = pokeNames.filter({$0.prefix(searchText.count) == searchText.lowercased()})
+        searching = true
+        Pokemon.reloadData()
     }
     
 }

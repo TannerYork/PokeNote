@@ -26,38 +26,25 @@ struct Pokemon {
         baseXP = API["base_experience"].int!
         height = API["height"].int!
         weight = API["weight"].int!
-        print(API["abilities"])
         
-        //The below code currently gets the number of objects in the array but not the name value needed
-        for ability in API["abilities"] {
-            abilities.append(API["abilities"]["ability"]["name"].stringValue)
+        //Gets the arrays of the needed JSON objects and appeneds the name to the corresponding string array
+        for ability in API["abilities"].arrayValue {
+            abilities.append(ability["ability"]["name"].stringValue)
         }
-        for move in API["moves"] {
-            moves.append(API["moves"]["move"]["name"].stringValue)
+        
+        for move in API["moves"].arrayValue {
+            moves.append(move["move"]["name"].stringValue)
         }
         
         for (key, value) in API["sprites"] {
             sprites[key] = value.stringValue
         }
         
-        for type in API["types"] {
-            types.append(API["types"]["type"]["name"].stringValue)
+        for type in API["types"].arrayValue {
+            types.append(type["type"]["name"].stringValue)
         }
-    
-}
-
-}
-
-
-struct Type {
-    let name: String
-    let url: String
-    
-    init(_ json: JSON) {
-        name = json["name"].stringValue
-        url = json["url"].stringValue
+        print(types)
     }
-    
 }
 
 
