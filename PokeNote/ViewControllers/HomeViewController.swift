@@ -105,8 +105,10 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+//Extinsion for the seach bar delegate
 extension HomeViewController: UISearchBarDelegate {
     
+    //Checks when text is changed and populates the seach reaults based on the prefix on the names that is equal to the number of the texts characters and the characters themseleves 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchResults = pokeNames.filter({$0.prefix(searchText.count) == searchText.lowercased()})
         searching = true

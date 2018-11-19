@@ -69,10 +69,30 @@ class DetailsViewController: UIViewController {
             pokeTypes.append(type)
         }
         getTypeColor(pokeTypes)
-        let details = ""
-        self.details.text = details
         
+        //Createa a string for the types to be used in the discription/details of the pokemon.
+        var types = ""
+        for type in pokemon.types {
+            types.append(type)
+            types.append("\n")
+        }
         
+        //Createa a string for the abilities to be used in the discription/details of the pokemon.
+        var abilities = ""
+        for ability in pokemon.abilities {
+            abilities.append(ability)
+            abilities.append("\n")
+        }
+        
+        let detials = """
+Type/Types:
+\(types)
+        
+Abilities:
+\(abilities)
+"""
+        self.details.text = detials
+
     }
     
     

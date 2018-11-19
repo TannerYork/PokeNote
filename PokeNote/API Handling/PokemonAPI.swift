@@ -20,6 +20,7 @@ struct Pokemon {
     var moves: [String] = []
     var sprites: [String : String] = [:]
     var types: [String] = []
+    
     init(_ API: JSON) {
         id = API["id"].stringValue
         name = API["name"].stringValue
